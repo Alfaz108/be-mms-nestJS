@@ -21,12 +21,15 @@ export class BorderService {
     return res;
   }
 
-  async findById(id: string): Promise<Border> {
+  async findById(id: mongoose.Types.ObjectId): Promise<Border> {
     const border = await this.borderModel.findById(id);
     return border;
   }
 
-  async updateById(id: string, border: updateBorderDto): Promise<Border> {
+  async updateById(
+    id: mongoose.Types.ObjectId,
+    border: updateBorderDto,
+  ): Promise<Border> {
     return await this.borderModel.findByIdAndUpdate(id, border, {
       new: true,
       runValidators: true,

@@ -18,6 +18,15 @@ export class Border {
   @Prop({ type: String, required: true })
   roomNumber: string;
 
+  @Prop({ type: Number, default: 0, required: true })
+  initialDepositAmount: number;
+
+  @Prop({ type: Number, default: 0, required: true })
+  depositAmount: number;
+
+  @Prop({ type: Number, default: 0, required: true })
+  mealQuantity: number;
+
   @Prop({ type: String, enum: STATUS_ENUM, required: true })
   status: STATUS_ENUM;
 }

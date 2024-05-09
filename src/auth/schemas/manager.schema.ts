@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema({
   timestamps: true,
+  versionKey: false,
 })
 export class Manager {
   @Prop({ type: String, required: true })

@@ -2,6 +2,7 @@ import {
   IsEmail,
   IsEnum,
   IsNotEmpty,
+  IsNumber,
   IsOptional,
   IsString,
   MinLength,
@@ -28,5 +29,17 @@ export class createBorderDto {
 
   @IsNotEmpty()
   @IsEnum(STATUS_ENUM)
-  sataus: STATUS_ENUM;
+  status: STATUS_ENUM;
+
+  @IsNotEmpty({ message: 'total price is required' })
+  @IsNumber()
+  initialDepositAmount: number;
+
+  @IsNotEmpty({ message: 'meal quantity is required' })
+  @IsNumber()
+  mealQuantity: number;
+
+  @IsNotEmpty({ message: 'total price is required' })
+  @IsNumber()
+  depositAmount: number;
 }

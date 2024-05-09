@@ -14,6 +14,7 @@ import { Border } from './schemas/border.schema';
 import { AuthGuard } from '@nestjs/passport';
 import { createBorderDto } from './dto/create.border.dto';
 import { updateBorderDto } from './dto/update.border.dto';
+import mongoose from 'mongoose';
 
 @Controller('border')
 export class BorderController {
@@ -47,14 +48,17 @@ export class BorderController {
   // GET a border by ID
   @Get(':id')
   @UseGuards(AuthGuard())
-  async getBorder(@Param('id') id: string): Promise<Border> {
+  async getBorder(@Param('id') id: mongoose.Types.ObjectId): Promise<Border> {
     return this.borderService.findById(id);
   }
 
   // PUT update a border by ID
   @Put(':id')
   @UseGuards(AuthGuard())
-  async updateBorder(@Param('id') id: string, @Body() border: updateBorderDto) {
+  async updateBorder(
+    @Param('id') id: mongoose.Types.ObjectId,
+    @Body() border: updateBorderDto,
+  ) {
     try {
       const data = await this.borderService.updateById(id, border);
       return {
@@ -77,12 +81,12 @@ export class BorderController {
       const data = await this.borderService.deleteById(id);
       return {
         data,
-        message: 'border update successfully',
+        message: 'border delete successfully',
       };
     } catch (error) {
       return {
         error: error.message,
-        message: 'border update failed',
+        message: 'border delete failed',
       };
     }
   }

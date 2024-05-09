@@ -1,10 +1,13 @@
 import {
   IsEmail,
+  IsEnum,
   IsNotEmpty,
+  IsNumber,
   IsOptional,
   IsString,
   MinLength,
 } from 'class-validator';
+import { STATUS_ENUM } from 'src/constant/enums/status.Enam';
 
 export class updateBorderDto {
   @IsNotEmpty({ message: 'Name is required' })
@@ -23,4 +26,20 @@ export class updateBorderDto {
   @IsNotEmpty()
   @IsString({ message: 'Room Number must be valid' })
   readonly roomNumber: string;
+
+  @IsNotEmpty({ message: 'total price is required' })
+  @IsNumber()
+  initialDepositAmount: number;
+
+  @IsNotEmpty({ message: 'total price is required' })
+  @IsNumber()
+  depositAmount: number;
+
+  @IsNotEmpty({ message: 'meal quantity is required' })
+  @IsNumber()
+  mealQuantity: number;
+
+  @IsNotEmpty()
+  @IsEnum(STATUS_ENUM)
+  status: STATUS_ENUM;
 }
