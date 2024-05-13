@@ -6,6 +6,9 @@ import { createDepositDto } from './dto/create.deposit.dto';
 import { Border } from 'src/border/schemas/border.schema';
 import { BorderService } from 'src/border/border.service';
 import { updateBorderDto } from 'src/border/dto/update.border.dto';
+import { UpdateSummaryDto } from 'src/summary/dto/update.summary.dto copy';
+import { SummaryService } from 'src/summary/summary.service';
+import { Summary } from 'src/summary/Schemas/summary.schema';
 
 @Injectable()
 export class DepositService {
@@ -13,6 +16,7 @@ export class DepositService {
     @InjectModel(Deposit.name)
     private depositModel: mongoose.Model<Deposit>,
     private readonly border: BorderService,
+    private readonly summary: SummaryService,
   ) {}
 
   async findAll(): Promise<Deposit[]> {
@@ -21,7 +25,7 @@ export class DepositService {
   }
   async create(
     deposit: createDepositDto,
-  ): Promise<{ deposit: Deposit; border: Border }> {
+  ): Promise<{ deposit: Deposit; border: Border; summary: Summary }> {
     const border = await this.border.findById(deposit?.border);
     if (!border) {
       throw new NotFoundException('Border not found');
@@ -30,7 +34,29 @@ export class DepositService {
     const newDepositAmount =
       Number(deposit?.depositAmount) + Number(border?.depositAmount);
 
-    const updateDto: updateBorderDto = {
+    const createdDeposit = await this.depositModel.create(deposit);
+
+    const summary = await this.summary.findByBorderId(createdDeposit?.border);
+
+    const newSummaryAmount =
+      Number(deposit?.depositAmount) + Number(summary?.summaryAmount);
+
+    const summaryUpdateDto = {
+      border: summary?.border,
+      mealRate: summary?.mealRate,
+      mealQuantity: summary?.mealQuantity,
+      totalCost: summary?.totalCost,
+      depositAmount: newDepositAmount,
+      summaryAmount: newSummaryAmount,
+    };
+
+    console.log({ summaryUpdateDto });
+    const summaryUpdate = await this.summary.updateById(
+      summary?._id,
+      summaryUpdateDto,
+    );
+
+    const updateBorderDto = {
       name: border.name,
       mobile: border.mobile,
       roomNumber: border.roomNumber,
@@ -38,16 +64,20 @@ export class DepositService {
       initialDepositAmount: border.initialDepositAmount,
       mealQuantity: border.mealQuantity,
       status: border.status,
+      summaryAmount: newSummaryAmount,
     };
 
-    const createdDeposit = await this.depositModel.create(deposit);
     const borderUpdate = await this.border.updateById(
       deposit?.border,
-      updateDto,
+      updateBorderDto,
     );
 
-    console.log({ borderUpdate });
+    console.log({ summaryUpdate });
 
-    return { deposit: createdDeposit, border: borderUpdate };
+    return {
+      deposit: createdDeposit,
+      border: borderUpdate,
+      summary: summaryUpdate,
+    };
   }
 }

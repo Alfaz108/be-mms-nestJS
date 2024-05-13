@@ -12,10 +12,10 @@ import { BazarModule } from 'src/bazar/bazar.module';
   imports: [
     AuthModule,
     MongooseModule.forFeature([{ name: 'Summary', schema: SummarySchema }]),
-    BorderModule,
     BazarModule,
   ],
   controllers: [SummaryController],
   providers: [SummaryService],
+  exports: [SummaryService],
 })
 export class SummaryModule {}

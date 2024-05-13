@@ -27,7 +27,7 @@ export class createBorderDto {
   @IsString({ message: 'Room Number must be valid' })
   readonly roomNumber: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'status is required' })
   @IsEnum(STATUS_ENUM)
   status: STATUS_ENUM;
 
@@ -39,7 +39,19 @@ export class createBorderDto {
   @IsNumber()
   mealQuantity: number;
 
-  @IsNotEmpty({ message: 'total price is required' })
+  @IsNotEmpty({ message: 'meal rate is required' })
+  @IsNumber()
+  mealRate: number;
+
+  @IsNotEmpty({ message: 'total cost is required' })
+  @IsNumber()
+  totalCost: number;
+
+  @IsNotEmpty({ message: 'summary amount is required' })
+  @IsNumber()
+  summaryAmount: number;
+
+  @IsNotEmpty({ message: 'deposit amount is required' })
   @IsNumber()
   depositAmount: number;
 }

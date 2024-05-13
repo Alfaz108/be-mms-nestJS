@@ -1,12 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 import { STATUS_ENUM } from 'src/constant/enums/status.Enam';
 
 @Schema({
   timestamps: true,
   versionKey: false,
 })
-export class Summary {
+export class Summary extends Document {
   @Prop({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Border',
@@ -18,13 +18,13 @@ export class Summary {
   mealRate: number;
 
   @Prop({ type: Number, default: 0, required: true })
-  totalMeal: number;
+  mealQuantity: number;
 
   @Prop({ type: Number, default: 0, required: true })
   depositAmount: number;
 
   @Prop({ type: Number, default: 0, required: true })
-  costAmount: number;
+  totalCost: number;
 
   @Prop({ type: Number, default: 0, required: true })
   summaryAmount: number;

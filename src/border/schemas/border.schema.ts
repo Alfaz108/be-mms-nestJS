@@ -27,6 +27,15 @@ export class Border {
   @Prop({ type: Number, default: 0, required: true })
   mealQuantity: number;
 
+  @Prop({ type: Number, default: 0, required: true })
+  mealRate: number;
+
+  @Prop({ type: Number, default: 0, required: true })
+  totalCost: number;
+
+  @Prop({ type: Number, default: 0, required: true })
+  summaryAmount: number;
+
   @Prop({ type: String, enum: STATUS_ENUM, required: true })
   status: STATUS_ENUM;
 }

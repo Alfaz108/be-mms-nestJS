@@ -4,56 +4,37 @@ import * as mongoose from 'mongoose';
 import { BorderService } from 'src/border/border.service';
 import { Summary } from './Schemas/summary.schema';
 import { BazarService } from 'src/bazar/bazar.service';
+import { CreateSummaryDto } from './dto/create.summary.dto';
+import { UpdateSummaryDto } from './dto/update.summary.dto copy';
 
 @Injectable()
 export class SummaryService {
   constructor(
     @InjectModel(Summary.name)
     private summaryModel: mongoose.Model<Summary>,
-    private readonly border: BorderService,
+    // private readonly border: BorderService,
     private readonly bazar: BazarService,
   ) {}
 
-  async findAll(): Promise<any[]> {
-    const borders = await this.border.findAll();
-    const bazars = await this.bazar.findAll();
+  async findAll(): Promise<Summary[]> {
+    const border = await this.summaryModel.find();
+    return border;
+  }
 
-    if (!borders) {
-      throw new NotFoundException('Border not found');
-    }
+  async create(summary: CreateSummaryDto): Promise<Summary> {
+    const res = await this.summaryModel.create(summary);
+    return res;
+  }
 
-    let totalMeal = 0;
-    let totalBazar = 0;
+  async updateById(id: string, summary: UpdateSummaryDto): Promise<Summary> {
+    return await this.summaryModel.findByIdAndUpdate(id, summary, {
+      new: true,
+      runValidators: true,
+    });
+  }
 
-    for (const singleBorder of borders) {
-      totalMeal += singleBorder?.mealQuantity;
-    }
-
-    if (bazars) {
-      for (const singleBazar of bazars) {
-        totalBazar += singleBazar?.totalPrice;
-      }
-    }
-
-    const mealRate = totalMeal > 0 ? totalBazar / totalMeal : 0;
-    const alfaz = [];
-
-    for (const [index, singleBorder] of borders.entries()) {
-      const totalCost = mealRate * singleBorder.mealQuantity || 0;
-      const summaryAmount = singleBorder.depositAmount - totalCost;
-
-      console.log(singleBorder);
-
-      alfaz.push({
-        border: singleBorder,
-        mealRate: mealRate,
-        totalMeal: singleBorder.mealQuantity,
-        depositAmount: singleBorder.depositAmount,
-        costAmount: totalCost,
-        summaryAmount: summaryAmount,
-      });
-    }
-
-    return alfaz;
+  async findByBorderId(id: mongoose.Types.ObjectId): Promise<Summary> {
+    const border = await this.summaryModel.findOne({ border: id });
+    return border;
   }
 }
