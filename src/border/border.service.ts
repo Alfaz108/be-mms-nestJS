@@ -52,7 +52,6 @@ export class BorderService {
       depositAmount: border?.depositAmount,
       mealQuantity: border?.mealQuantity,
       roomNumber: border?.roomNumber,
-      status: border?.status,
       mealRate: mealRate,
       totalCost: 0,
       summaryAmount: border?.depositAmount,

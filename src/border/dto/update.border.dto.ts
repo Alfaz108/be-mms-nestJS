@@ -38,8 +38,4 @@ export class updateBorderDto {
   @IsNotEmpty({ message: 'meal quantity is required' })
   @IsNumber()
   mealQuantity: number;
-
-  @IsNotEmpty()
-  @IsEnum(STATUS_ENUM)
-  status: STATUS_ENUM;
 }

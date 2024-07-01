@@ -27,10 +27,6 @@ export class createBorderDto {
   @IsString({ message: 'Room Number must be valid' })
   readonly roomNumber: string;
 
-  @IsNotEmpty({ message: 'status is required' })
-  @IsEnum(STATUS_ENUM)
-  status: STATUS_ENUM;
-
   @IsNotEmpty({ message: 'total price is required' })
   @IsNumber()
   initialDepositAmount: number;

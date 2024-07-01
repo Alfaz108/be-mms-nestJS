@@ -57,7 +57,6 @@ export class MealService {
         depositAmount: border.depositAmount,
         initialDepositAmount: border.initialDepositAmount,
         mealQuantity: newMealQuantity,
-        status: border.status,
       };
 
       const updatedBorder = await this.border.updateById(
