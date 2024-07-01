@@ -50,7 +50,6 @@ export class DepositService {
       summaryAmount: newSummaryAmount,
     };
 
-    console.log({ summaryUpdateDto });
     const summaryUpdate = await this.summary.updateById(
       summary?._id,
       summaryUpdateDto,
@@ -71,8 +70,6 @@ export class DepositService {
       deposit?.border,
       updateBorderDto,
     );
-
-    console.log({ summaryUpdate });
 
     return {
       deposit: createdDeposit,

@@ -8,6 +8,7 @@ import { BazarService } from 'src/bazar/bazar.service';
 import { SummaryService } from 'src/summary/summary.service';
 import { Summary } from 'src/summary/Schemas/summary.schema';
 import { CreateSummaryDto } from 'src/summary/dto/create.summary.dto';
+import { CreateMealDto } from 'src/meal/dto/create.meal.dto';
 
 @Injectable()
 export class BorderService {
@@ -67,6 +68,7 @@ export class BorderService {
       totalCost: 0,
       summaryAmount: border?.depositAmount,
     };
+
     const createdSummary = await this.summary.create(summaryAdd);
 
     return { border: createdBorder, summary: createdSummary };
