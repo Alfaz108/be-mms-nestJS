@@ -7,7 +7,7 @@ import {
   IsString,
   MinLength,
 } from 'class-validator';
-import { STATUS_ENUM } from 'src/constant/enums/status.enum';
+import { STATUS_ENUM } from 'src/common/enums/status.enum';
 
 export class updateBorderDto {
   @IsNotEmpty({ message: 'Name is required' })
