@@ -1,4 +1,4 @@
-export enum STATUS_ENUM {
+export const enum STATUS_ENUM {
   ACTIVE = 'ACTIVE',
   INACTIVE = 'INACTIVE',
 }
