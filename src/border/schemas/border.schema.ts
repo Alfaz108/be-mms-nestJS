@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { STATUS_ENUM } from 'src/constant/enums/statusEnum';
+import { STATUS_ENUM } from 'src/constant/enums/status.enum';
 
 @Schema({
   timestamps: true,
@@ -36,7 +36,7 @@ export class Border {
   @Prop({ type: Number, default: 0, required: true })
   summaryAmount: number;
 
-  @Prop({ type: String, required: true })
+  @Prop({ type: String, enum: STATUS_ENUM, required: true })
   status: STATUS_ENUM;
 }
 
