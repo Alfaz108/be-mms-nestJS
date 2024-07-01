@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
-import { STATUS_ENUM } from 'src/constant/enums/status.Enam';
 
 export class MealChield {
   @Prop({

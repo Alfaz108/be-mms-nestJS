@@ -7,7 +7,7 @@ import {
   IsString,
   MinLength,
 } from 'class-validator';
-import { STATUS_ENUM } from 'src/constant/enums/status.Enam';
+import { STATUS_ENUM } from 'src/constant/enums/status-enum';
 
 export class updateBorderDto {
   @IsNotEmpty({ message: 'Name is required' })
@@ -38,4 +38,8 @@ export class updateBorderDto {
   @IsNotEmpty({ message: 'meal quantity is required' })
   @IsNumber()
   mealQuantity: number;
+
+  @IsNotEmpty()
+  @IsEnum(STATUS_ENUM)
+  status: STATUS_ENUM;
 }

@@ -7,7 +7,7 @@ import {
   IsString,
   MinLength,
 } from 'class-validator';
-import { STATUS_ENUM } from 'src/constant/enums/status.Enam';
+import { STATUS_ENUM } from 'src/constant/enums/status-enum';
 
 export class createBorderDto {
   @IsNotEmpty({ message: 'Name is required' })
@@ -50,4 +50,8 @@ export class createBorderDto {
   @IsNotEmpty({ message: 'deposit amount is required' })
   @IsNumber()
   depositAmount: number;
+
+  @IsNotEmpty()
+  @IsEnum(STATUS_ENUM)
+  status: STATUS_ENUM;
 }

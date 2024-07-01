@@ -62,6 +62,7 @@ export class DepositService {
       depositAmount: newDepositAmount,
       initialDepositAmount: border.initialDepositAmount,
       mealQuantity: border.mealQuantity,
+      status: border.status,
       summaryAmount: newSummaryAmount,
     };
 

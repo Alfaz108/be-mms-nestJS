@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose from 'mongoose'; // Import mongoose without destructuring
 import { Border } from 'src/border/schemas/border.schema';
-import { STATUS_ENUM } from 'src/constant/enums/status.Enam';
 
 @Schema({
   timestamps: true,
