@@ -1,4 +1,5 @@
-export enum STATUS_ENUM {
+enum STATUS_ENUM {
   ACTIVE = 'ACTIVE',
   INACTIVE = 'INACTIVE',
 }
+export default STATUS_ENUM;
