@@ -1,6 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { STATUS_ENUM } from 'src/common/enums/status.enum';
 
+enum STATUS_ENUM {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE',
+}
 @Schema({
   timestamps: true,
   versionKey: false,
