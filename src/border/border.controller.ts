@@ -63,7 +63,7 @@ export class BorderController {
       const data = await this.borderService.updateById(id, border);
       return {
         data,
-        message: 'border update successfully',
+        message: 'border update successfully b',
       };
     } catch (error) {
       return {
@@ -90,6 +90,4 @@ export class BorderController {
       };
     }
   }
-
-  
 }
